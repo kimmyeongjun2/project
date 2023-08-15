@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <time.h>
+
+int main() {
+    // 현재 시간 구하기
+    time_t currentTime;
+    struct tm *localTime;
+
+    time(&currentTime);
+    localTime = localtime(&currentTime);
+
+    // 현재 시간 출력
+    printf("현재 시간: %02d:%02d:%02d\n", localTime->tm_hour, localTime->tm_min, localTime->tm_sec);
+
+    // 예정된 수업 시간 (24시간 형식)
+    int scheduledHour = 14;
+    int scheduledMinute = 30;
+
+    // 수업 시간과 현재 시간 비교
+    if (localTime->tm_hour < scheduledHour || (localTime->tm_hour == scheduledHour && localTime->tm_min < scheduledMinute)) {
+        printf("수업이 아직 시작하지 않았습니다.\n");
+        printf("다음 수업 시간: %02d:%02d\n", scheduledHour, scheduledMinute);
+    } else {
+        printf("수업이 이미 시작되었습니다.\n");
+    }
+
+    return 0;
+}
